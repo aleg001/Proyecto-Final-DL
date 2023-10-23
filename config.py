@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python
-'''
+"""
 By Dabi Ahn. andabi412@gmail.com.
 https://www.github.com/andabi
-'''
+"""
 
 import tensorflow as tf
 from utils import closest_power_of_two
@@ -11,31 +11,31 @@ from utils import closest_power_of_two
 # TODO tf arg
 # Model
 class ModelConfig:
-    SR = 16000                # Sample Rate
-    L_FRAME = 1024            # default 1024
+    SR = 16000  # Sample Rate
+    L_FRAME = 1024  # default 1024
     L_HOP = closest_power_of_two(L_FRAME / 4)
     SEQ_LEN = 4
     # For Melspectogram
     N_MELS = 512
     F_MIN = 0.0
 
+
 # Train
 class TrainConfig:
-    CASE = str(ModelConfig.SEQ_LEN) + 'frames_ikala'
-    CKPT_PATH = 'checkpoints/' + CASE
-    GRAPH_PATH = 'graphs/' + CASE + '/train'
-    DATA_PATH = 'dataset/train/ikala'
+    CASE = str(ModelConfig.SEQ_LEN) + "frames_ikala"
+    CKPT_PATH = "checkpoints/" + CASE
+    GRAPH_PATH = "graphs/" + CASE + "/train"
+    DATA_PATH = "dataset/train/ikala"
     LR = 0.0001
     FINAL_STEP = 100000
     CKPT_STEP = 500
     NUM_WAVFILE = 1
-    SECONDS = 8.192 # To get 512,512 in melspecto
+    SECONDS = 8.192  # To get 512,512 in melspecto
     RE_TRAIN = True
     session_conf = tf.ConfigProto(
-        device_count={'CPU': 1, 'GPU': 1},
+        device_count={"CPU": 1, "GPU": 1},
         gpu_options=tf.GPUOptions(
-            allow_growth=True,
-            per_process_gpu_memory_fraction=0.25
+            allow_growth=True, per_process_gpu_memory_fraction=0.25
         ),
     )
 
@@ -46,10 +46,10 @@ class TrainConfig:
 class EvalConfig:
     # CASE = '1frame'
     # CASE = '4-frames-masking-layer'
-    CASE = str(ModelConfig.SEQ_LEN) + 'frames_ikala'
-    CKPT_PATH = 'checkpoints/' + CASE
-    GRAPH_PATH = 'graphs/' + CASE + '/eval'
-    DATA_PATH = 'dataset/eval/kpop'
+    CASE = str(ModelConfig.SEQ_LEN) + "frames_ikala"
+    CKPT_PATH = "checkpoints/" + CASE
+    GRAPH_PATH = "graphs/" + CASE + "/eval"
+    DATA_PATH = "dataset/eval/kpop"
     # DATA_PATH = 'dataset/mir-1k/Wavfile'
     # DATA_PATH = 'dataset/ikala'
     GRIFFIN_LIM = False
@@ -59,9 +59,9 @@ class EvalConfig:
     RE_EVAL = True
     EVAL_METRIC = False
     WRITE_RESULT = True
-    RESULT_PATH = 'results/' + CASE
+    RESULT_PATH = "results/" + CASE
     session_conf = tf.ConfigProto(
-        device_count={'CPU': 1, 'GPU': 1},
+        device_count={"CPU": 1, "GPU": 1},
         gpu_options=tf.GPUOptions(allow_growth=True),
-        log_device_placement=False
+        log_device_placement=False,
     )

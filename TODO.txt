@@ -1,1 +1,0 @@
-Make sure end of wav-data is within time so as not zeros at end
